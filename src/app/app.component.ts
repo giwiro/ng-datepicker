@@ -11,7 +11,9 @@ export class AppComponent {
 
   constructor(private datePickerService: DatePickerService) {
     this.datePickerService.setLabels({
-      months: [],
+      months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+        'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
     });
   }
 }

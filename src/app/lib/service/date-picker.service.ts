@@ -35,11 +35,11 @@ export class DatePickerService {
       if (!(l.days instanceof Array)) {
         return console.error(new Error('days must be an array'));
       }
-      if (l.days.length !== 12) {
-        return console.error(new Error('days array\'s length must be 12'));
+      if (l.days.length !== 7) {
+        return console.error(new Error('days array\'s length must be 7'));
       }
+      this.daysLabels = [...l.days];
     }
-    this.daysLabels = [...l.days];
   }
 
   get labels(): DatePickerLabels {
