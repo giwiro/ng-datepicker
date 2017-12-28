@@ -10,6 +10,7 @@ $head-cell-font-weight: 400;
 $body-cell-overlay-width: 26px;
 $body-cell-overlay-height: 25px;
 $body-cell-overlay-border-radius: 50%;
+$body-cell-overlay-disabled-color: #e0e0e0;
 
 $body-cell-color: black;
 $body-cell-font-size: 15px;
@@ -58,26 +59,42 @@ div.calendar-wrap {
             width: $body-cell-overlay-width;
             height: $body-cell-overlay-height;
             border-radius: $body-cell-overlay-border-radius;
-            cursor: pointer;
             margin: auto;
 
-            &.with-hover:hover {
-              background-color: $body-cell-hover-bg-color;
+            &.disabled {
+              pointer-events: none;
+              cursor: not-allowed;
 
               span {
-                color: $body-cell-hover-color;
-                font-size: $body-cell-hover-font-size;
-                font-weight: $body-cell-hover-font-weight;
+                color: $body-cell-overlay-disabled-color;
               }
             }
 
+            &.choosable {
+              cursor: pointer;
+
+              &:hover {
+                background-color: $body-cell-hover-bg-color;
+
+                span {
+                  color: $body-cell-hover-color;
+                  font-size: $body-cell-hover-font-size;
+                  font-weight: $body-cell-hover-font-weight;
+                }
+              }
+            }
+
+            &.ranged {
+              background-color: grey;
+            }
+
             &.chosen {
-              background-color: $body-cell-chosen-bg-color;
+              background-color: $body-cell-chosen-bg-color!important;
 
               span {
-                color: $body-cell-chosen-color;
-                font-size: $body-cell-chosen-font-size;
-                font-weight: $body-cell-chosen-font-weight;
+                color: $body-cell-chosen-color!important;
+                font-size: $body-cell-chosen-font-size!important;
+                font-weight: $body-cell-chosen-font-weight!important;
               }
             }
 

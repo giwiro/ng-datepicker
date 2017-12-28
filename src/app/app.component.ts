@@ -7,7 +7,8 @@ import { DatePickerService } from './lib/public_api';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  public disableDatesBefore = new Date();
+  public disableDatesAfter = new Date();
 
   constructor(private datePickerService: DatePickerService) {
     this.datePickerService.setLabels({

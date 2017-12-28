@@ -13,9 +13,11 @@
         <td *ngFor="let d of row; let j = index">
           <div
             class="overlay"
-            [class.with-hover]="!noHover"
+            *ngIf="d"
+            [class.disabled]="isDisabledBeforeAfter(d)"
+            [class.choosable]="!noChoose"
             [class.chosen]="isChosenDay(d)"
-            (click)="chooseDay(d)" *ngIf="d">
+            (click)="chooseDay(d)">
             <span>{{d | padDayNumber}}</span>
           </div>
         </td>
