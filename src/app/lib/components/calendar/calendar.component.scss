@@ -1,0 +1,96 @@
+$calendar-width: 300px;
+$calendar-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$cell-width: 34px;
+$cell-height: 24px;
+
+$head-cell-font-size: 15px;
+$head-cell-font-weight: 400;
+
+$body-cell-overlay-width: 26px;
+$body-cell-overlay-height: 25px;
+$body-cell-overlay-border-radius: 50%;
+
+$body-cell-color: black;
+$body-cell-font-size: 15px;
+$body-cell-font-weight: 100;
+
+$body-cell-hover-bg-color: #11AEFA;
+$body-cell-hover-color: white;
+$body-cell-hover-font-size: 15px;
+$body-cell-hover-font-weight: 300;
+
+$body-cell-chosen-bg-color: #11AEFA;
+$body-cell-chosen-color: white;
+$body-cell-chosen-font-size: 15px;
+$body-cell-chosen-font-weight: 300;
+
+div.calendar-wrap {
+  width: $calendar-width;
+  border: solid 1px red;
+  font-family: $calendar-font-family;
+
+  h5 {
+
+  }
+
+  table {
+    thead {
+      tr > th {
+        width: $cell-width;
+        height: $cell-height;
+
+        span {
+          font-weight: $head-cell-font-weight;
+          font-size: $head-cell-font-size;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          width: $cell-width;
+          height: $cell-height;
+          text-align: center;
+
+          div.overlay {
+            width: $body-cell-overlay-width;
+            height: $body-cell-overlay-height;
+            border-radius: $body-cell-overlay-border-radius;
+            cursor: pointer;
+            margin: auto;
+
+            &.with-hover:hover {
+              background-color: $body-cell-hover-bg-color;
+
+              span {
+                color: $body-cell-hover-color;
+                font-size: $body-cell-hover-font-size;
+                font-weight: $body-cell-hover-font-weight;
+              }
+            }
+
+            &.chosen {
+              background-color: $body-cell-chosen-bg-color;
+
+              span {
+                color: $body-cell-chosen-color;
+                font-size: $body-cell-chosen-font-size;
+                font-weight: $body-cell-chosen-font-weight;
+              }
+            }
+
+            span {
+              line-height: $body-cell-overlay-height;
+              color: $body-cell-color;
+              font-size: $body-cell-font-size;
+              font-weight: $body-cell-font-weight;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+    }
+  }
+}
