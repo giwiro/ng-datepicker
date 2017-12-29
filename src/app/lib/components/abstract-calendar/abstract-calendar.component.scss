@@ -1,7 +1,7 @@
 $calendar-width: 300px;
 $calendar-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-$cell-width: 34px;
+$cell-width: 33px;
 $cell-height: 24px;
 
 $head-cell-font-size: 15px;
@@ -26,13 +26,19 @@ $body-cell-chosen-color: white;
 $body-cell-chosen-font-size: 15px;
 $body-cell-chosen-font-weight: 300;
 
+:host {
+  display: block;
+}
+
 div.calendar-wrap {
+  display: inline-block;
   width: $calendar-width;
   border: solid 1px red;
   font-family: $calendar-font-family;
 
   h5 {
-
+    margin: 10px 0;
+    text-align: center;
   }
 
   table {

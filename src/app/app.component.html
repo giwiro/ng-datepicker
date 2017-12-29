@@ -1,7 +1,19 @@
 <h1>Simple Calendar</h1>
 
-<app-calendar
+<app-single-calendar
   [noChoose]="false"
   [disableDatesBefore]="disableDatesAfter"
-  [disableDatesAfter]="disableDatesAfter"></app-calendar>
+  [disableDatesAfter]="disableDatesAfter"></app-single-calendar>
 
+<h1>Simple Calendar (No choose)</h1>
+
+<app-single-calendar
+  [noChoose]="true"></app-single-calendar>
+
+<h1>With Reactive Forms</h1>
+<p>Form value:</p>
+<pre>{{firstForm.value | json}}</pre>
+<form [formGroup]="firstForm">
+  <app-single-calendar
+    [bindFormControl]="firstForm.get('date')"></app-single-calendar>
+</form>
