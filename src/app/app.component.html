@@ -10,10 +10,34 @@
 <app-single-calendar
   [noChoose]="true"></app-single-calendar>
 
-<h1>With Reactive Forms</h1>
+<h1>Simple Calendar with Reactive Forms</h1>
 <p>Form value:</p>
 <pre>{{firstForm.value | json}}</pre>
 <form [formGroup]="firstForm">
   <app-single-calendar
     [bindFormControl]="firstForm.get('date')"></app-single-calendar>
 </form>
+
+
+<h1>Simple Calendar with directive and FormControl</h1>
+<pre>{{secondForm.value | json}}</pre>
+<form class="second-form" [formGroup]="secondForm">
+  <label>Date</label>
+  <input type="text" formControlName="date" datePickerSingle />
+  <br>
+  <label>Date2</label>
+  <input type="text" formControlName="date2" datePickerSingle />
+</form>
+
+<h3>Some text down</h3>
+
+<br />
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br />

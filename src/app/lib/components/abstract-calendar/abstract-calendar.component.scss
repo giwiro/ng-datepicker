@@ -1,5 +1,5 @@
-$calendar-width: 300px;
-$calendar-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$calendar-wrap-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$calendar-wrap-font-bg-color: white;
 
 $cell-width: 33px;
 $cell-height: 24px;
@@ -27,14 +27,14 @@ $body-cell-chosen-font-size: 15px;
 $body-cell-chosen-font-weight: 300;
 
 :host {
-  display: block;
+  display: inline-block;
 }
 
 div.calendar-wrap {
   display: inline-block;
-  width: $calendar-width;
   border: solid 1px red;
-  font-family: $calendar-font-family;
+  background-color: $calendar-wrap-font-bg-color;
+  font-family: $calendar-wrap-font-family;
 
   h5 {
     margin: 10px 0;

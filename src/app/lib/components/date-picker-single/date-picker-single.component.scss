@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  position: absolute;
+}
+
+div.date-picker-single-wrap {
+  display: inline-block;
+
+  &.hidden {
+    display: none;
+  }
+}

@@ -1,0 +1,9 @@
+<div
+  class="date-picker-single-wrap"
+  [class.hidden]="!open">
+  <app-single-calendar
+    [bindFormControl]="bindFormControl"
+    (changeChosenDay)="onChangeChosenDay($event)"
+    (changeMonth)="onChangeMonth($event)">
+  </app-single-calendar>
+</div>

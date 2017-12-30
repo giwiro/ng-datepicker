@@ -1,8 +1,12 @@
-import { Component, Input, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterContentInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { CalendarComponent } from '../abstract-calendar/abstract-calendar.component';
 import { DatePickerService } from '../../service/date-picker.service';
+
+export interface ChangeChosenDayResponse {
+  date: Date;
+}
 
 @Component({
   selector: 'app-single-calendar',
@@ -14,6 +18,7 @@ export class SingleCalendarComponent extends CalendarComponent implements AfterC
   private valueChangesSubscription: Subscription;
   @Input() startViewportAtChosen = true;
   @Input() bindFormControl: FormControl = new FormControl();
+  @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
 
   constructor(public datePickerService: DatePickerService) {
     super(datePickerService);
@@ -51,15 +56,18 @@ export class SingleCalendarComponent extends CalendarComponent implements AfterC
     }
     this.chosenDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), dateNumber);
     this.bindFormControl.setValue(this.chosenDate, { emitEvent: true });
+    this.changeChosenDay.emit({
+      date: new Date(this.chosenDate.getTime()),
+    });
   }
 
-  public setChosenDay(date: Date): void {
+  /* public setChosenDay(date: Date): void {
     if (this.isDisabledBeforeAfter(date.getDate())) {
       return console.error(new Error('Coudn\'t set chosen day because date is disabled'));
     }
     this.chosenDate = new Date(date.setHours(0, 0, 0, 0));
     this.bindFormControl.setValue(this.chosenDate, { emitEvent: true });
-  }
+  }*/
 
   public isChosenDay(dateNumber: number): boolean {
     if (!this.chosenDate) {
