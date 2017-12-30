@@ -11,14 +11,14 @@ import {
 import { FormControl, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { DatePickerSingleComponent } from '../../components/date-picker-single/date-picker-single.component';
-import { DatePickerSingleOptions } from '../../components/date-picker-single/date-picker-single-options';
+import { DatePickerSingleDirectiveOptions } from './date-picker-single-options';
 
 @Directive({
   // tslint:disable-next-line
   selector: '[datePickerSingle]',
 })
 export class DatePickerSingleDirective implements OnInit, OnDestroy {
-  @Input() options = {} as DatePickerSingleOptions;
+  @Input() options = {} as DatePickerSingleDirectiveOptions;
   private componentRef: ComponentRef<DatePickerSingleComponent>;
   private onChangeChosenDaySubscription: Subscription;
   private el: HTMLInputElement;

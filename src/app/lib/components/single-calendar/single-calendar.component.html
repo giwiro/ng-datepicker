@@ -1,4 +1,8 @@
 <div *ngIf="currentDate && labels" class="calendar-wrap">
+  <div class="controls-wrap">
+    <button class="prev-month" (click)="prevMonth()"><i class="arrow left"></i></button>
+    <button class="next-month" (click)="nextMonth()" ><i class="arrow right"></i></button>
+  </div>
   <h5>{{getCurrentMonthLabel()}} {{currentDate.getFullYear()}}</h5>
   <table>
     <thead>
@@ -24,6 +28,4 @@
     </tr>
     </tbody>
   </table>
-  <button (click)="prevMonth()">Prev Month</button>
-  <button (click)="nextMonth()">Next Month</button>
 </div>

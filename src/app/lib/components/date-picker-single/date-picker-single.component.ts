@@ -1,6 +1,7 @@
-import {Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DatePickerSingleOptions } from './date-picker-single-options';
+// import { DatePickerSingleOptions } from './date-picker-single-options';
+import { SingleCalendarOptions } from '../single-calendar/single-calendar-options';
 import { ChangeChosenDayResponse } from '../single-calendar/single-calendar.component';
 import { ChangeMonthResponse } from '../abstract-calendar/abstract-calendar.component';
 
@@ -9,17 +10,15 @@ import { ChangeMonthResponse } from '../abstract-calendar/abstract-calendar.comp
   templateUrl: './date-picker-single.component.html',
   styleUrls: ['./date-picker-single.component.scss']
 })
-export class DatePickerSingleComponent implements OnInit {
-  @Input() options: DatePickerSingleOptions;
+export class DatePickerSingleComponent {
+  // weird error on typescript if i use DatePickerSingleOptions
+  @Input() options = {} as SingleCalendarOptions;
   @Input() bindFormControl = new FormControl();
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
   private open = false;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   public onChangeChosenDay(changeChosenDayResponse: ChangeChosenDayResponse): void {
     this.changeChosenDay.emit(changeChosenDayResponse);

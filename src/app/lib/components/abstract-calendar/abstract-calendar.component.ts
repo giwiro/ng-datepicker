@@ -11,7 +11,6 @@ export abstract class CalendarComponent implements OnInit {
   @Input() startViewportDate: Date;
   @Input() monthLabels: string[];
   @Input() dayLabels: string[];
-  @Input() noChoose = false;
   @Input() disableDatesBefore: Date;
   @Input() disableDatesAfter: Date;
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();

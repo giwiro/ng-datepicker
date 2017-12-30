@@ -16,6 +16,8 @@ export interface ChangeChosenDayResponse {
 export class SingleCalendarComponent extends CalendarComponent implements AfterContentInit, OnDestroy {
   public chosenDate: Date;
   private valueChangesSubscription: Subscription;
+  @Input() noChoose = false;
+  @Input() startChosenToday = false;
   @Input() startViewportAtChosen = true;
   @Input() bindFormControl: FormControl = new FormControl();
   @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
@@ -26,6 +28,9 @@ export class SingleCalendarComponent extends CalendarComponent implements AfterC
 
   ngAfterContentInit() {
     this.currentDate = new Date();
+    if (this.startChosenToday) {
+      this.bindFormControl.setValue(new Date().setHours(0, 0, 0, 0));
+    }
     if (this.bindFormControl.value) {
       this.chosenDate = new Date(this.bindFormControl.value.getTime());
       if (this.startViewportAtChosen) {

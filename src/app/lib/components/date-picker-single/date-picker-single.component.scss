@@ -1,3 +1,7 @@
+$date-picker-single-bg-color: white;
+$date-picker-single-padding: 15px;
+$date-picker-border-color: grey;
+
 :host {
   display: block;
   position: absolute;
@@ -5,6 +9,9 @@
 
 div.date-picker-single-wrap {
   display: inline-block;
+  background-color: $date-picker-single-bg-color;
+  padding: $date-picker-single-padding;
+  border: solid 1px $date-picker-border-color;
 
   &.hidden {
     display: none;
