@@ -7,11 +7,15 @@ import {
   ComponentFactoryResolver,
   ViewContainerRef,
   HostListener,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { DatePickerSingleComponent } from '../../components/date-picker-single/date-picker-single.component';
 import { DatePickerSingleDirectiveOptions } from './date-picker-single-options';
+import { ChangeMonthResponse } from '../../components/abstract-calendar/abstract-calendar.component';
+import { ChangeChosenDayResponse } from '../../components/single-calendar/single-calendar.component';
 
 @Directive({
   // tslint:disable-next-line
@@ -19,8 +23,11 @@ import { DatePickerSingleDirectiveOptions } from './date-picker-single-options';
 })
 export class DatePickerSingleDirective implements OnInit, OnDestroy {
   @Input() options = {} as DatePickerSingleDirectiveOptions;
+  @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
+  @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
   private componentRef: ComponentRef<DatePickerSingleComponent>;
   private onChangeChosenDaySubscription: Subscription;
+  private onChangeMonthSubscription: Subscription;
   private el: HTMLInputElement;
 
   constructor(private control:              NgControl,
@@ -36,21 +43,34 @@ export class DatePickerSingleDirective implements OnInit, OnDestroy {
     component.bindFormControl = this.control.control as FormControl;
 
     this.onChangeChosenDaySubscription = component.changeChosenDay.subscribe(val => {
+      this.onChangeChosenDay(val);
       // Explicit false
       if (this.options.closeOnChangeDay === false) {
         return;
       }
       component.hide();
     });
+    this.onChangeMonthSubscription = component.changeMonth.subscribe(val => this.onChangeMonth(val));
   }
 
   ngOnDestroy() {
     if (this.onChangeChosenDaySubscription) {
       this.onChangeChosenDaySubscription.unsubscribe();
     }
+    if (this.onChangeMonthSubscription) {
+      this.onChangeMonthSubscription.unsubscribe();
+    }
     if (this.componentRef) {
       this.componentRef.destroy();
     }
+  }
+
+  public onChangeChosenDay(changeChosenDayResponse: ChangeChosenDayResponse): void {
+    this.changeChosenDay.emit(changeChosenDayResponse);
+  }
+
+  public onChangeMonth(changeMonthResponse: ChangeMonthResponse): void {
+    this.changeMonth.emit(changeMonthResponse);
   }
 
   @HostListener('focus', ['$event.target.value'])

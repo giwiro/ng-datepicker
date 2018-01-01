@@ -1,18 +1,19 @@
 <div
   class="date-picker-single-wrap"
   [class.hidden]="!open">
-
-  <app-single-calendar
-    [bindFormControl]="bindFormControl"
-    [noChoose]="options.noChoose"
-    [startChosenToday]="options.startChosenToday"
-    [startViewportAtChosen]="options.startViewportAtChosen"
-    [startViewportDate]="options.startViewportDate"
-    [monthLabels]="options.monthLabels"
-    [dayLabels]="options.dayLabels"
-    [disableDatesBefore]="options.disableDatesBefore"
-    [disableDatesAfter]="options.disableDatesAfter"
-    (changeChosenDay)="onChangeChosenDay($event)"
-    (changeMonth)="onChangeMonth($event)">
-  </app-single-calendar>
+  <div class="date-picker-single-content">
+    <app-single-calendar
+      [bindFormControl]="bindFormControl"
+      [noChoose]="options.noChoose"
+      [startChosenToday]="options.startChosenToday"
+      [startViewportAtChosen]="options.startViewportAtChosen"
+      [startViewportDate]="options.startViewportDate"
+      [monthLabels]="options.monthLabels"
+      [dayLabels]="options.dayLabels"
+      [disableDatesBefore]="options.disableDatesBefore"
+      [disableDatesAfter]="options.disableDatesAfter"
+      (changeChosenDay)="onChangeChosenDay($event)"
+      (changeMonth)="onChangeMonth($event)">
+    </app-single-calendar>
+  </div>
 </div>

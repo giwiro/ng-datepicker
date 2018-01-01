@@ -11,6 +11,7 @@ export abstract class CalendarComponent implements OnInit {
   @Input() startViewportDate: Date;
   @Input() monthLabels: string[];
   @Input() dayLabels: string[];
+  @Input() noControls: boolean;
   @Input() disableDatesBefore: Date;
   @Input() disableDatesAfter: Date;
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
@@ -22,6 +23,8 @@ export abstract class CalendarComponent implements OnInit {
     this.labels.months = this.datePickerService.labels.months;
     this.labels.days = this.datePickerService.labels.days;
   }
+
+  public abstract chooseDay(dateNumber: number): void;
 
   ngOnInit() {
     // Initialize labels

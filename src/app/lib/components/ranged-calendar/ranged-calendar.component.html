@@ -18,9 +18,12 @@
         <div
           class="overlay"
           *ngIf="d"
+          [class.first-day]="d === 1"
           [class.disabled]="isDisabledBeforeAfter(d)"
           [class.choosable]="!noChoose"
-          [class.chosen]="isChosenDay(d)"
+          [class.chosen-left]="isChosenLeftDay(d)"
+          [class.chosen-right]="isChosenRightDay(d)"
+          [class.ranged]="isWithinRange(d)"
           (click)="chooseDay(d)">
           <span>{{d | padDayNumber}}</span>
         </div>

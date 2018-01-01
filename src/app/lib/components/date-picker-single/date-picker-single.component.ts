@@ -28,6 +28,10 @@ export class DatePickerSingleComponent {
     this.changeMonth.emit(changeMonthResponse);
   }
 
+  public toggle() {
+    this.open = !this.open;
+  }
+
   public show() {
     this.open = true;
   }

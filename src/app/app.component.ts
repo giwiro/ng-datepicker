@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DatePickerService } from './lib/public_api';
+import { DatePickerService, DatePickerSingleComponent } from './lib/public_api';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ export class AppComponent {
   public disableDatesAfter = new Date();
   public firstForm: FormGroup;
   public secondForm: FormGroup;
+  @ViewChild('datePickerSingleChild') datePickerSingleChild: DatePickerSingleComponent;
 
   constructor(private datePickerService:      DatePickerService,
               private formBuilder:            FormBuilder) {
@@ -32,4 +33,5 @@ export class AppComponent {
     setTimeout(() =>
       this.firstForm.get('date').setValue(new Date(2017, 11, 30)));
   }
+
 }

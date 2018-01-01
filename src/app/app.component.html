@@ -1,16 +1,18 @@
-<h1>Simple Calendar</h1>
+<h1>Single Calendar</h1>
 
 <app-single-calendar
   [noChoose]="false"
   [disableDatesBefore]="disableDatesAfter"
   [disableDatesAfter]="disableDatesAfter"></app-single-calendar>
 
-<h1>Simple Calendar (No choose)</h1>
+<h1>Single Calendar (No choose)</h1>
 
 <app-single-calendar
+  [startChosenToday]="true"
+  [noControls]="true"
   [noChoose]="true"></app-single-calendar>
 
-<h1>Simple Calendar with Reactive Forms</h1>
+<h1>Single Calendar with Reactive Forms</h1>
 <p>Form value:</p>
 <pre>{{firstForm.value | json}}</pre>
 <form [formGroup]="firstForm">
@@ -19,7 +21,7 @@
 </form>
 
 
-<h1>Simple Calendar with directive and FormControl</h1>
+<h1>Single Calendar with directive and FormControl</h1>
 <pre>{{secondForm.value | json}}</pre>
 <form class="second-form" [formGroup]="secondForm">
   <label>Date</label>
@@ -33,11 +35,10 @@
 
 <br />
 
+<h1>Date Picker Simple</h1>
+<button (click)="datePickerSingleChild.toggle()">toggle</button>
+<app-date-picker-single #datePickerSingleChild></app-date-picker-single>
 
-<br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<h1>Ranged Calendar</h1>
+<app-ranged-calendar></app-ranged-calendar>

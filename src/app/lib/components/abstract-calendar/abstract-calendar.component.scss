@@ -40,8 +40,9 @@ div.calendar-wrap {
     justify-content: space-between;
     margin-bottom: -28px;
     margin-top: 10px;
+    padding: 0 5px;
 
-    button {
+    span {
       cursor: pointer;
       background: none;
       border: none;
@@ -49,7 +50,7 @@ div.calendar-wrap {
 
       i.arrow {
         border: solid black;
-        border-width: 0 3px 3px 0;
+        border-width: 0 2px 2px 0;
         display: inline-block;
         padding: 5px;
 
@@ -72,6 +73,9 @@ div.calendar-wrap {
   }
 
   table {
+    border-spacing: 0;
+    border-collapse: collapse;
+
     thead {
       tr > th {
         width: $cell-width;
@@ -91,11 +95,34 @@ div.calendar-wrap {
           height: $cell-height;
           text-align: center;
 
+          &:last-child > div.overlay.ranged {
+            border-top-right-radius: 45%;
+            border-bottom-right-radius: 45%;
+          }
+
+          &:first-child > div.overlay.ranged {
+            border-top-left-radius: 45%;
+            border-bottom-left-radius: 45%;
+            &:before {
+              content: normal;
+            }
+          }
+
+          &:first-child > div.overlay.chosen-right{
+            &:before {
+              content: normal;
+            }
+          }
+
           div.overlay {
             width: $body-cell-overlay-width;
             height: $body-cell-overlay-height;
             border-radius: $body-cell-overlay-border-radius;
+            position: relative;
             margin: auto;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
 
             &.disabled {
               pointer-events: none;
@@ -111,6 +138,14 @@ div.calendar-wrap {
 
               &:hover {
                 background-color: $body-cell-hover-bg-color;
+                // border: solid 1px red;
+
+                &.ranged {
+                  border: solid 1px red;
+                  &:before {
+                    top: -1px;
+                  }
+                }
 
                 span {
                   color: $body-cell-hover-color;
@@ -121,11 +156,68 @@ div.calendar-wrap {
             }
 
             &.ranged {
-              background-color: grey;
+              width: $cell-width;
+              background-color: #bbbbbb;
+              border-radius: 0;
+
+              &:before {
+                content: '';
+                position: absolute;
+                width: ($cell-width / 2);
+                height: $body-cell-overlay-height;
+                left: -($cell-width / 2);
+                background: #bbbbbb;
+                z-index: -1;
+              }
+
+              &.first-day {
+                border-top-left-radius: 45%;
+                border-bottom-left-radius: 45%;
+
+                &:before {
+                  content: normal;
+                }
+              }
             }
 
             &.chosen {
               background-color: $body-cell-chosen-bg-color!important;
+
+              span {
+                color: $body-cell-chosen-color!important;
+                font-size: $body-cell-chosen-font-size!important;
+                font-weight: $body-cell-chosen-font-weight!important;
+              }
+            }
+
+            &.chosen-left {
+              background-color: $body-cell-chosen-bg-color!important;
+
+              span {
+                color: $body-cell-chosen-color!important;
+                font-size: $body-cell-chosen-font-size!important;
+                font-weight: $body-cell-chosen-font-weight!important;
+              }
+            }
+
+            &.chosen-right {
+              background-color: $body-cell-chosen-bg-color!important;
+
+              &:before {
+                content: '';
+                position: absolute;
+                width: $cell-width;
+                height: $body-cell-overlay-height;
+                left: -$cell-width + 10px;
+                background: #bbbbbb;
+                z-index: -1;
+              }
+
+              &.first-day {
+                &:before {
+                  content: normal;
+                }
+              }
 
               span {
                 color: $body-cell-chosen-color!important;

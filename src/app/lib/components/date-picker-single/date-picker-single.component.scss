@@ -2,18 +2,33 @@ $date-picker-single-bg-color: white;
 $date-picker-single-padding: 15px;
 $date-picker-border-color: grey;
 
+$date-picker-trans-speed: 200ms;
+
 :host {
-  display: block;
+  display: flex;
   position: absolute;
+  z-index: 1;
 }
 
 div.date-picker-single-wrap {
   display: inline-block;
   background-color: $date-picker-single-bg-color;
-  padding: $date-picker-single-padding;
-  border: solid 1px $date-picker-border-color;
+  overflow: hidden;
+
+  -moz-transition: $date-picker-trans-speed;
+  -ms-transition: $date-picker-trans-speed;
+  -o-transition: $date-picker-trans-speed;
+  -webkit-transition: $date-picker-trans-speed;
+  transition: $date-picker-trans-speed;
+
+  max-height: 300px;
 
   &.hidden {
-    display: none;
+    max-height: 0;
+  }
+
+  div.date-picker-single-content {
+    border: solid 1px $date-picker-border-color;
+    padding: $date-picker-single-padding;
   }
 }
