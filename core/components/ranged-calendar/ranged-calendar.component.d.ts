@@ -2,7 +2,7 @@ import { EventEmitter, AfterContentInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CalendarComponent } from '../abstract-calendar/abstract-calendar.component';
 import { DatePickerService, FormatterFromDateFunction, FormatterToDateFunction } from '../../service/date-picker.service';
-export declare enum RangedDaySide {
+export declare const enum RangedDaySide {
     LEFT = "left",
     RIGHT = "right",
 }

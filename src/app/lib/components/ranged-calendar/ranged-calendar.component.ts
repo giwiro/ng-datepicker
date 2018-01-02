@@ -8,7 +8,7 @@ import {
 } from '../../service/date-picker.service';
 
 // export type RangedDaySide = 'left' | 'right';
-export enum RangedDaySide {
+export const enum RangedDaySide {
   LEFT = 'left',
   RIGHT = 'right',
 }
