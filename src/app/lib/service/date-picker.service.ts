@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
+// Hack for typescript for aot packaging
+import * as momentImported from 'moment'; const moment = momentImported;
 
 export interface DatePickerLabels {
   months: string[];
