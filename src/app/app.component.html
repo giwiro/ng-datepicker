@@ -25,10 +25,18 @@
 <pre>{{secondForm.value | json}}</pre>
 <form class="second-form" [formGroup]="secondForm">
   <label>Date</label>
-  <input type="text" formControlName="date" datePickerSingle />
+  <input type="text"
+         formControlName="date"
+         datePickerSingle
+         formatterFromDate="DD/MM/YYYY"
+         formatterToDate="DD/MM/YYYY" />
   <br>
   <label>Date2</label>
-  <input type="text" formControlName="date2" datePickerSingle />
+  <input type="text"
+         formControlName="date2"
+         datePickerSingle
+         formatterFromDate="DD/MM/YYYY"
+         formatterToDate="DD/MM/YYYY" />
 </form>
 
 <h3>Some text down</h3>
@@ -41,4 +49,23 @@
 
 
 <h1>Ranged Calendar</h1>
-<app-ranged-calendar></app-ranged-calendar>
+<span>Side: {{rangedCalendarChild.side}}</span><button>change side</button><br>
+<app-ranged-calendar
+  #rangedCalendarChild></app-ranged-calendar>
+
+
+<h1>Ranged Calendar with Reactive Forms</h1>
+<form [formGroup]="rangedForm">
+  <span>left</span>: <input type="text" formControlName="dateLeft">
+  <span>right</span>: <input type="text" formControlName="dateRight">
+  <pre>Side: {{rangedCalendarChild2.side}}</pre>
+  <pre>{{rangedCalendarChild2.chosenLeftDay}}</pre>
+  <pre>{{rangedCalendarChild2.chosenRightDay}}</pre>
+  <br />
+  <app-ranged-calendar
+    #rangedCalendarChild2
+    formatterFromDate="DD/MM/YYYY"
+    formatterToDate="DD/MM/YYYY"
+    [bindLeftFormControl]="rangedForm.get('dateLeft')"
+    [bindRightFormControl]="rangedForm.get('dateRight')"></app-ranged-calendar>
+</form>

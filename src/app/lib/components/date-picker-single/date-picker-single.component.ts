@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { SingleCalendarOptions } from '../single-calendar/single-calendar-options';
 import { ChangeChosenDayResponse } from '../single-calendar/single-calendar.component';
 import { ChangeMonthResponse } from '../abstract-calendar/abstract-calendar.component';
+import { FormatterFromDateFunction, FormatterToDateFunction } from '../../service/date-picker.service';
 
 @Component({
   selector: 'app-date-picker-single',
@@ -14,6 +15,8 @@ export class DatePickerSingleComponent {
   // weird error on typescript if i use DatePickerSingleOptions
   @Input() options = {} as SingleCalendarOptions;
   @Input() bindFormControl = new FormControl();
+  @Input() formatterToDate: string | FormatterToDateFunction;
+  @Input() formatterFromDate: string | FormatterFromDateFunction;
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
   private open = false;

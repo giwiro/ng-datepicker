@@ -1,6 +1,6 @@
 <div
   class="date-picker-single-wrap"
-  [class.hidden]="!open">
+  [class.hidden]="!isOpen()">
   <div class="date-picker-single-content">
     <app-single-calendar
       [bindFormControl]="bindFormControl"
@@ -12,6 +12,8 @@
       [dayLabels]="options.dayLabels"
       [disableDatesBefore]="options.disableDatesBefore"
       [disableDatesAfter]="options.disableDatesAfter"
+      [formatterToDate]="formatterToDate"
+      [formatterFromDate]="formatterFromDate"
       (changeChosenDay)="onChangeChosenDay($event)"
       (changeMonth)="onChangeMonth($event)">
     </app-single-calendar>

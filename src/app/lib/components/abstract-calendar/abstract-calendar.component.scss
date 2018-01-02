@@ -16,6 +16,8 @@ $body-cell-color: black;
 $body-cell-font-size: 15px;
 $body-cell-font-weight: 100;
 
+$body-cell-ranged-bg-color: #e0e0e0;
+
 $body-cell-hover-bg-color: #11AEFA;
 $body-cell-hover-color: white;
 $body-cell-hover-font-size: 15px;
@@ -157,7 +159,7 @@ div.calendar-wrap {
 
             &.ranged {
               width: $cell-width;
-              background-color: #bbbbbb;
+              background-color: $body-cell-ranged-bg-color;
               border-radius: 0;
 
               &:before {
@@ -166,7 +168,7 @@ div.calendar-wrap {
                 width: ($cell-width / 2);
                 height: $body-cell-overlay-height;
                 left: -($cell-width / 2);
-                background: #bbbbbb;
+                background: $body-cell-ranged-bg-color;
                 z-index: -1;
               }
 
@@ -209,7 +211,7 @@ div.calendar-wrap {
                 width: $cell-width;
                 height: $body-cell-overlay-height;
                 left: -$cell-width + 10px;
-                background: #bbbbbb;
+                background: $body-cell-ranged-bg-color;
                 z-index: -1;
               }
 

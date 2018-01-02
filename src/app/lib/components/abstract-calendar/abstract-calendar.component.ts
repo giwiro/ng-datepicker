@@ -16,7 +16,7 @@ export abstract class CalendarComponent implements OnInit {
   @Input() disableDatesAfter: Date;
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   public matrix: number[][];
-  protected currentDate: Date;
+  public currentDate: Date;
   public labels: DatePickerLabels = {} as DatePickerLabels;
 
   constructor(public datePickerService: DatePickerService) {

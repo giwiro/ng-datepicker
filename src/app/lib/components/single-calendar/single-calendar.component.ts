@@ -2,10 +2,15 @@ import { Component, Input, Output, EventEmitter, AfterContentInit, OnDestroy } f
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { CalendarComponent } from '../abstract-calendar/abstract-calendar.component';
-import { DatePickerService } from '../../service/date-picker.service';
+import {
+  DatePickerService,
+  FormatterToDateFunction,
+  FormatterFromDateFunction,
+} from '../../service/date-picker.service';
 
 export interface ChangeChosenDayResponse {
   date: Date;
+  formatted?: any;
 }
 
 @Component({
@@ -19,6 +24,8 @@ export class SingleCalendarComponent extends CalendarComponent implements AfterC
   @Input() noChoose = false;
   @Input() startChosenToday = false;
   @Input() startViewportAtChosen = true;
+  @Input() formatterToDate: string | FormatterToDateFunction;
+  @Input() formatterFromDate: string | FormatterFromDateFunction;
   @Input() bindFormControl: FormControl = new FormControl();
   @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
 
@@ -32,16 +39,17 @@ export class SingleCalendarComponent extends CalendarComponent implements AfterC
       this.bindFormControl.setValue(new Date((new Date()).setHours(0, 0, 0, 0)));
     }
     if (this.bindFormControl.value) {
-      this.chosenDate = new Date(this.bindFormControl.value.getTime());
+      this.chosenDate = this.datePickerService.formatToDate(this.bindFormControl.value, this.formatterToDate);
       if (this.startViewportAtChosen) {
         this.currentDate = this.chosenDate;
       }
     }
     this.valueChangesSubscription = this.bindFormControl.valueChanges.subscribe(v => {
-      if (!(v instanceof Date)) {
+      const c = this.datePickerService.formatToDate(v, this.formatterToDate);
+      if (!(c instanceof Date)) {
         return console.error(new Error('value is not instance of Date'));
       }
-      this.chosenDate = new Date(v.setHours(0, 0, 0, 0));
+      this.chosenDate = new Date(c.setHours(0, 0, 0, 0));
     });
     this.setCalendarViewport(this.currentDate);
   }
@@ -60,9 +68,11 @@ export class SingleCalendarComponent extends CalendarComponent implements AfterC
       return console.error(new Error('Coudn\'t set chosen day because date is disabled'));
     }
     this.chosenDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), dateNumber);
-    this.bindFormControl.setValue(this.chosenDate, { emitEvent: true });
+    const formattedDate = this.datePickerService.formatFromDate(this.chosenDate, this.formatterFromDate);
+    this.bindFormControl.setValue(formattedDate, { emitEvent: true });
     this.changeChosenDay.emit({
       date: new Date(this.chosenDate.getTime()),
+      formatted: formattedDate,
     });
   }
 
@@ -81,5 +91,10 @@ export class SingleCalendarComponent extends CalendarComponent implements AfterC
     return this.chosenDate.getFullYear() === this.currentDate.getFullYear() &&
       this.chosenDate.getMonth() === this.currentDate.getMonth() &&
       this.chosenDate.getDate() === dateNumber;
+  }
+
+  get value(): Date {
+    const d = this.chosenDate ? new Date(this.chosenDate.getTime()) : undefined;
+    return d ? this.datePickerService.formatFromDate(d) : d;
   }
 }

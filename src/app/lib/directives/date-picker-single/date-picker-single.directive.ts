@@ -16,6 +16,7 @@ import { DatePickerSingleComponent } from '../../components/date-picker-single/d
 import { DatePickerSingleDirectiveOptions } from './date-picker-single-options';
 import { ChangeMonthResponse } from '../../components/abstract-calendar/abstract-calendar.component';
 import { ChangeChosenDayResponse } from '../../components/single-calendar/single-calendar.component';
+import { FormatterFromDateFunction, FormatterToDateFunction } from '../../service/date-picker.service';
 
 @Directive({
   // tslint:disable-next-line
@@ -25,6 +26,8 @@ export class DatePickerSingleDirective implements OnInit, OnDestroy {
   @Input() options = {} as DatePickerSingleDirectiveOptions;
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
+  @Input() formatterToDate: string | FormatterToDateFunction;
+  @Input() formatterFromDate: string | FormatterFromDateFunction;
   private componentRef: ComponentRef<DatePickerSingleComponent>;
   private onChangeChosenDaySubscription: Subscription;
   private onChangeMonthSubscription: Subscription;
@@ -41,6 +44,8 @@ export class DatePickerSingleDirective implements OnInit, OnDestroy {
     this.componentRef = this.viewContainerRef.createComponent(factory);
     const component = this.componentRef.instance;
     component.bindFormControl = this.control.control as FormControl;
+    component.formatterFromDate = this.formatterFromDate;
+    component.formatterToDate = this.formatterToDate;
 
     this.onChangeChosenDaySubscription = component.changeChosenDay.subscribe(val => {
       this.onChangeChosenDay(val);
