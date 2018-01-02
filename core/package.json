@@ -71,5 +71,10 @@
     "url-loader": "^0.6.2",
     "webpack": "~3.10.0",
     "webpack-dev-server": "~2.9.3"
-  }
+  },
+  "main": "bundles/ngx-datepicker.umd.js",
+  "module": "esm5/ngx-datepicker.js",
+  "es2015": "esm2015/ngx-datepicker.js",
+  "typings": "ngx-datepicker.d.ts",
+  "metadata": "ngx-datepicker.metadata.json"
 }
