@@ -403,7 +403,7 @@ module.exports = {
       "exclude": /(\\|\/)node_modules(\\|\/)/,
       "failOnError": false,
       "onDetected": false,
-      "cwd": "/Users/giwiro/Documents/ngrx-datepicker"
+      "cwd": "/Users/giwiro/Documents/ngx-datepicker"
     }),
     new NamedLazyChunksWebpackPlugin(),
     new HtmlWebpackPlugin({
