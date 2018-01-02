@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "webpack-dev-server --port=4200",
     "build:dev": "webpack",
+    "build:prod": "ng build --prod",
     "build": "ng-packagr -p ng-package.json",
     "test": "karma start ./karma.conf.js",
     "lint": "ng lint",
