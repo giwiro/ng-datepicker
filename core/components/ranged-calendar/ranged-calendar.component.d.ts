@@ -2,10 +2,11 @@ import { EventEmitter, AfterContentInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CalendarComponent } from '../abstract-calendar/abstract-calendar.component';
 import { DatePickerService, FormatterFromDateFunction, FormatterToDateFunction } from '../../service/date-picker.service';
-export declare const enum RangedDaySide {
-    LEFT = "left",
-    RIGHT = "right",
-}
+export declare type RangedDaySide = 'left' | 'right';
+export declare const RangedDaySideValues: Readonly<{
+    LEFT: RangedDaySide;
+    RIGHT: RangedDaySide;
+}>;
 export interface ChangeChosenRangedDaysResponse {
     side: RangedDaySide;
     date: Date;

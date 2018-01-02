@@ -439,6 +439,10 @@ SingleCalendarComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+var RangedDaySideValues = Object.freeze({
+    LEFT: /** @type {?} */ ('left'),
+    RIGHT: /** @type {?} */ ('right'),
+});
 /**
  * @record
  */
@@ -450,7 +454,7 @@ var RangedCalendarComponent = (function (_super) {
     function RangedCalendarComponent(datePickerService) {
         var _this = _super.call(this, datePickerService) || this;
         _this.datePickerService = datePickerService;
-        _this.side = "left" /* LEFT */;
+        _this.side = RangedDaySideValues.LEFT;
         _this.noChoose = false;
         _this.startChosenLeftToday = false;
         _this.bindLeftFormControl = new FormControl();
@@ -470,7 +474,7 @@ var RangedCalendarComponent = (function (_super) {
         this.currentDate = new Date();
         if (this.startChosenLeftToday) {
             this.chosenLeftDay = new Date(this.currentDate.setHours(0, 0, 0, 0));
-            this.side = "right" /* RIGHT */;
+            this.side = RangedDaySideValues.RIGHT;
         }
         var /** @type {?} */ l = this.datePickerService.formatToDate(this.bindLeftFormControl.value, this.formatterToDate);
         var /** @type {?} */ r = this.datePickerService.formatToDate(this.bindRightFormControl.value, this.formatterToDate);
@@ -479,22 +483,22 @@ var RangedCalendarComponent = (function (_super) {
                 console.error(new Error('right value must be more than left'));
                 this.chosenLeftDay = l;
                 this.bindRightFormControl.setValue(null);
-                this.side = "right" /* RIGHT */;
+                this.side = RangedDaySideValues.RIGHT;
             }
             else {
                 this.chosenLeftDay = l;
                 this.chosenRightDay = r;
-                this.side = "right" /* RIGHT */;
+                this.side = RangedDaySideValues.RIGHT;
             }
         }
         else {
             if (l) {
                 this.chosenLeftDay = l;
-                this.side = "right" /* RIGHT */;
+                this.side = RangedDaySideValues.RIGHT;
             }
             else if (r) {
                 this.chosenRightDay = r;
-                this.side = "left" /* LEFT */;
+                this.side = RangedDaySideValues.LEFT;
             }
         }
         this.setCalendarViewport(this.currentDate);
@@ -511,13 +515,13 @@ var RangedCalendarComponent = (function (_super) {
             return console.error(new Error('Coudn\'t set chosen day because date is disabled'));
         }
         var /** @type {?} */ chosen = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), dateNumber);
-        if ((this.side === "right" /* RIGHT */ &&
+        if ((this.side === RangedDaySideValues.RIGHT &&
             this.bindLeftFormControl.value &&
             chosen.getTime() <= this.chosenLeftDay.getTime()) ||
-            (this.side === "left" /* LEFT */ &&
+            (this.side === RangedDaySideValues.LEFT &&
                 this.bindRightFormControl.value &&
                 chosen.getTime() >= this.chosenRightDay.getTime())) {
-            this.side = "left" /* LEFT */;
+            this.side = RangedDaySideValues.LEFT;
             this.chosenRightDay = undefined;
             this.bindRightFormControl.setValue(null);
         }
@@ -527,10 +531,10 @@ var RangedCalendarComponent = (function (_super) {
             date: chosen,
             formatted: formattedDate,
         };
-        if (this.side === "left" /* LEFT */) {
+        if (this.side === RangedDaySideValues.LEFT) {
             this.chosenLeftDay = chosen;
             this.bindLeftFormControl.setValue(formattedDate, { emitEvent: true });
-            this.side = "right" /* RIGHT */;
+            this.side = RangedDaySideValues.RIGHT;
         }
         else {
             this.chosenRightDay = chosen;
@@ -821,5 +825,5 @@ DatePickerModule.ctorParameters = function () { return []; };
 /**
  * Generated bundle index. Do not edit.
  */
-export { DatePickerService, DatePickerSingleComponent, SingleCalendarComponent, RangedCalendarComponent, DatePickerModule, CalendarComponent as ɵa, DatePickerSingleDirective as ɵc, PadDayNumberPipe as ɵb };
+export { DatePickerService, DatePickerSingleComponent, SingleCalendarComponent, RangedDaySideValues, RangedCalendarComponent, DatePickerModule, CalendarComponent as ɵa, DatePickerSingleDirective as ɵc, PadDayNumberPipe as ɵb };
 //# sourceMappingURL=ngx-datepicker.js.map

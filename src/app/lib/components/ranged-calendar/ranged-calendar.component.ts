@@ -7,11 +7,11 @@ import {
   FormatterToDateFunction,
 } from '../../service/date-picker.service';
 
-// export type RangedDaySide = 'left' | 'right';
-export const enum RangedDaySide {
-  LEFT = 'left',
-  RIGHT = 'right',
-}
+export type RangedDaySide = 'left' | 'right';
+export const RangedDaySideValues = Object.freeze({
+  LEFT: 'left' as RangedDaySide,
+  RIGHT: 'right' as RangedDaySide,
+});
 
 export interface ChangeChosenRangedDaysResponse {
   // If not left, then right
@@ -26,7 +26,7 @@ export interface ChangeChosenRangedDaysResponse {
   styleUrls: ['../abstract-calendar/abstract-calendar.component.scss']
 })
 export class RangedCalendarComponent extends CalendarComponent implements AfterContentInit, OnDestroy {
-  @Input() side = RangedDaySide.LEFT;
+  @Input() side = RangedDaySideValues.LEFT;
   @Input() noChoose = false;
   @Input() startChosenLeftToday = false;
   @Input() bindLeftFormControl: FormControl = new FormControl();
@@ -49,7 +49,7 @@ export class RangedCalendarComponent extends CalendarComponent implements AfterC
     this.currentDate = new Date();
     if (this.startChosenLeftToday) {
       this.chosenLeftDay = new Date(this.currentDate.setHours(0, 0, 0, 0));
-      this.side = RangedDaySide.RIGHT;
+      this.side = RangedDaySideValues.RIGHT;
     }
     const l: Date = this.datePickerService.formatToDate(this.bindLeftFormControl.value, this.formatterToDate);
     const r: Date = this.datePickerService.formatToDate(this.bindRightFormControl.value, this.formatterToDate);
@@ -58,19 +58,19 @@ export class RangedCalendarComponent extends CalendarComponent implements AfterC
         console.error(new Error('right value must be more than left'));
         this.chosenLeftDay = l;
         this.bindRightFormControl.setValue(null);
-        this.side = RangedDaySide.RIGHT;
+        this.side = RangedDaySideValues.RIGHT;
       }else {
         this.chosenLeftDay = l;
         this.chosenRightDay = r;
-        this.side = RangedDaySide.RIGHT;
+        this.side = RangedDaySideValues.RIGHT;
       }
     }else {
       if (l) {
         this.chosenLeftDay = l;
-        this.side = RangedDaySide.RIGHT;
+        this.side = RangedDaySideValues.RIGHT;
       }else if (r) {
         this.chosenRightDay = r;
-        this.side = RangedDaySide.LEFT;
+        this.side = RangedDaySideValues.LEFT;
       }
     }
     this.setCalendarViewport(this.currentDate);
@@ -84,13 +84,13 @@ export class RangedCalendarComponent extends CalendarComponent implements AfterC
       return console.error(new Error('Coudn\'t set chosen day because date is disabled'));
     }
     const chosen = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), dateNumber);
-    if ((this.side === RangedDaySide.RIGHT &&
+    if ((this.side === RangedDaySideValues.RIGHT &&
           this.bindLeftFormControl.value &&
           chosen.getTime() <= this.chosenLeftDay.getTime()) ||
-        (this.side === RangedDaySide.LEFT &&
+        (this.side === RangedDaySideValues.LEFT &&
           this.bindRightFormControl.value &&
           chosen.getTime() >= this.chosenRightDay.getTime())) {
-      this.side = RangedDaySide.LEFT;
+      this.side = RangedDaySideValues.LEFT;
       this.chosenRightDay = undefined;
       this.bindRightFormControl.setValue(null);
     }
@@ -100,10 +100,10 @@ export class RangedCalendarComponent extends CalendarComponent implements AfterC
       date: chosen,
       formatted: formattedDate,
     };
-    if (this.side === RangedDaySide.LEFT) {
+    if (this.side === RangedDaySideValues.LEFT) {
       this.chosenLeftDay = chosen;
       this.bindLeftFormControl.setValue(formattedDate, { emitEvent: true });
-      this.side = RangedDaySide.RIGHT;
+      this.side = RangedDaySideValues.RIGHT;
     }else {
       this.chosenRightDay = chosen;
       this.bindRightFormControl.setValue(formattedDate, { emitEvent: true });
