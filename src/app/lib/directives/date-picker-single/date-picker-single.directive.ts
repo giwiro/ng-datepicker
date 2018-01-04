@@ -9,11 +9,11 @@ import {
   HostListener,
   Output,
   EventEmitter,
+  Optional,
 } from '@angular/core';
-import { FormControl, NgControl } from '@angular/forms';
+import {Form, FormControl, NgControl} from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { DatePickerSingleComponent } from '../../components/date-picker-single/date-picker-single.component';
-import { DatePickerSingleDirectiveOptions } from './date-picker-single-options';
 import { ChangeMonthResponse } from '../../components/abstract-calendar/abstract-calendar.component';
 import { ChangeChosenDayResponse } from '../../components/single-calendar/single-calendar.component';
 import { FormatterFromDateFunction, FormatterToDateFunction } from '../../service/date-picker.service';
@@ -23,19 +23,21 @@ import { FormatterFromDateFunction, FormatterToDateFunction } from '../../servic
   selector: '[datePickerSingle]',
 })
 export class DatePickerSingleDirective implements OnInit, OnDestroy {
-  @Input() options = {} as DatePickerSingleDirectiveOptions;
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
+  @Input() closeOnChangeDay = true;
+  @Input() closeOnClickOutside = true;
   @Input() formatterToDate: string | FormatterToDateFunction;
   @Input() formatterFromDate: string | FormatterFromDateFunction;
+  @Input() bindFormControl: FormControl;
   private componentRef: ComponentRef<DatePickerSingleComponent>;
   private onChangeChosenDaySubscription: Subscription;
   private onChangeMonthSubscription: Subscription;
   private el: HTMLInputElement;
 
-  constructor(private control:              NgControl,
-              public  viewContainerRef:     ViewContainerRef,
-              private resolver:             ComponentFactoryResolver) {
+  constructor(@Optional() private control:              NgControl,
+              public  viewContainerRef:                 ViewContainerRef,
+              private resolver:                         ComponentFactoryResolver) {
     this.el = this.viewContainerRef.element.nativeElement as HTMLInputElement;
   }
 
@@ -43,14 +45,18 @@ export class DatePickerSingleDirective implements OnInit, OnDestroy {
     const factory = this.resolver.resolveComponentFactory(DatePickerSingleComponent);
     this.componentRef = this.viewContainerRef.createComponent(factory);
     const component = this.componentRef.instance;
-    component.bindFormControl = this.control.control as FormControl;
+    if (this.control) {
+      component.bindFormControl = this.control.control as FormControl;
+    }else if (this.bindFormControl) {
+      component.bindFormControl = this.bindFormControl;
+    }
     component.formatterFromDate = this.formatterFromDate;
     component.formatterToDate = this.formatterToDate;
 
     this.onChangeChosenDaySubscription = component.changeChosenDay.subscribe(val => {
       this.onChangeChosenDay(val);
       // Explicit false
-      if (this.options.closeOnChangeDay === false) {
+      if (this.closeOnChangeDay === false) {
         return;
       }
       component.hide();
@@ -96,7 +102,7 @@ export class DatePickerSingleDirective implements OnInit, OnDestroy {
     }
 
     // Explicit false
-    if (this.options.closeOnClickOutside === false) {
+    if (this.closeOnClickOutside === false) {
       return;
     }
 

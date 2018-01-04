@@ -33,7 +33,7 @@
   <br>
   <label>Date2</label>
   <input type="text"
-         formControlName="date2"
+         [formControl]="secondForm.get('date2')"
          datePickerSingle
          formatterFromDate="DD/MM/YYYY"
          formatterToDate="DD/MM/YYYY" />
