@@ -8,13 +8,13 @@ export interface ChangeMonthResponse {
 }
 
 export abstract class CalendarComponent implements OnInit {
+  @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   @Input() startViewportDate: Date;
   @Input() monthLabels: string[];
   @Input() dayLabels: string[];
   @Input() noControls: boolean;
   @Input() disableDatesBefore: Date;
   @Input() disableDatesAfter: Date;
-  @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   public matrix: number[][];
   public currentDate: Date;
   public labels: DatePickerLabels = {} as DatePickerLabels;

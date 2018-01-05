@@ -19,15 +19,16 @@ export interface ChangeChosenDayResponse {
   styleUrls: ['../abstract-calendar/abstract-calendar.component.scss']
 })
 export class SingleCalendarComponent extends CalendarComponent implements AfterContentInit, OnDestroy {
-  public chosenDate: Date;
-  private valueChangesSubscription: Subscription;
+  @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
   @Input() noChoose = false;
+  @Input() className: string;
   @Input() startChosenToday = false;
   @Input() startViewportAtChosen = true;
   @Input() formatterToDate: string | FormatterToDateFunction;
   @Input() formatterFromDate: string | FormatterFromDateFunction;
   @Input() bindFormControl: FormControl = new FormControl();
-  @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
+  public chosenDate: Date;
+  private valueChangesSubscription: Subscription;
 
   constructor(public datePickerService: DatePickerService) {
     super(datePickerService);

@@ -1,7 +1,6 @@
 import {Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 // import { DatePickerSingleOptions } from './date-picker-single-options';
-import { SingleCalendarOptions } from '../single-calendar/single-calendar-options';
 import { ChangeChosenDayResponse } from '../single-calendar/single-calendar.component';
 import { ChangeMonthResponse } from '../abstract-calendar/abstract-calendar.component';
 import { FormatterFromDateFunction, FormatterToDateFunction } from '../../service/date-picker.service';
@@ -12,13 +11,22 @@ import { FormatterFromDateFunction, FormatterToDateFunction } from '../../servic
   styleUrls: ['./date-picker-single.component.scss']
 })
 export class DatePickerSingleComponent {
-  // weird error on typescript if i use DatePickerSingleOptions
-  @Input() options = {} as SingleCalendarOptions;
-  @Input() bindFormControl = new FormControl();
-  @Input() formatterToDate: string | FormatterToDateFunction;
-  @Input() formatterFromDate: string | FormatterFromDateFunction;
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
+  @Input() bindFormControl = new FormControl();
+  @Input() noChoose = false;
+  @Input() className: string;
+  @Input() singleCalendarClassName: string;
+  @Input() startChosenToday = false;
+  @Input() startViewportAtChosen = true;
+  @Input() startViewportDate: Date;
+  @Input() monthLabels: string[];
+  @Input() dayLabels: string[];
+  @Input() disableDatesBefore: Date;
+  @Input() disableDatesAfter: Date;
+  @Input() formatterToDate: string | FormatterToDateFunction;
+  @Input() formatterFromDate: string | FormatterFromDateFunction;
+  @Input() noControls: boolean;
   private open = false;
 
   constructor() { }

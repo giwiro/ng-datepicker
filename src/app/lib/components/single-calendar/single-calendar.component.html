@@ -1,4 +1,7 @@
-<div *ngIf="currentDate && labels" class="calendar-wrap">
+<div
+  *ngIf="currentDate && labels"
+  class="calendar-wrap"
+  [ngClass]="className">
   <div class="controls-wrap" *ngIf="!noControls">
     <span class="prev-month" (click)="prevMonth()"><i class="arrow left"></i></span>
     <span class="next-month" (click)="nextMonth()" ><i class="arrow right"></i></span>
