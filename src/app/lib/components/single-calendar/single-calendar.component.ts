@@ -37,7 +37,8 @@ export class SingleCalendarComponent extends CalendarComponent implements AfterC
   ngAfterContentInit() {
     this.currentDate = new Date();
     if (this.startChosenToday) {
-      this.bindFormControl.setValue(new Date((new Date()).setHours(0, 0, 0, 0)));
+      this.chosenDate = this.datePickerService.formatToDate(new Date(), this.formatterToDate);
+      this.bindFormControl.setValue(new Date(this.chosenDate.setHours(0, 0, 0, 0)));
     }
     if (this.bindFormControl.value) {
       this.chosenDate = this.datePickerService.formatToDate(this.bindFormControl.value, this.formatterToDate);

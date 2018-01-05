@@ -39,6 +39,10 @@ export abstract class CalendarComponent implements OnInit {
 
   // Main function that controls the render of the month
   public setCalendarViewport(date: Date): void {
+    if (!(date instanceof Date)) {
+      return console.error(new Error('setCalendarViewport executed with non-Date argument. ' +
+        'Please provide a formatterToDate'));
+    }
     const firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const lastOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     this.currentDate = firstOfMonth;

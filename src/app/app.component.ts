@@ -4,7 +4,7 @@ import {
   DatePickerService,
   DatePickerSingleComponent,
   RangedCalendarComponent,
-} from './lib/public_api';
+} from '../../dist';
 
 @Component({
   selector: 'app-root',

@@ -35,13 +35,18 @@ export class DatePickerService {
     this.formatterFromDate = f;
   }
 
-  public formatToDate(input: any, auxFormatter?: string | FormatterToDateFunction): Date | any {
+  public formatToDate(input: any, auxFormatter?: string | FormatterToDateFunction): Date {
     const formatter = auxFormatter || this.formatterToDate;
     if (formatter instanceof Function) {
       return formatter(input);
     }else if (typeof formatter === 'string') {
       return moment(input, formatter).toDate();
     }else {
+      if (!(input instanceof Date)) {
+        console.error(new Error('formatToDate executed with non-Date argument. ' +
+          'Please provide a formatterToDate. Returning default new Date()'));
+        return new Date();
+      }
       return input;
     }
   }
