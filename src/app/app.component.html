@@ -2,7 +2,7 @@
 
 <app-single-calendar
   [noChoose]="false"
-  className="cacaclass"
+  [className]="['cacaclass', 'cacapichi']"
   [disableDatesBefore]="disableDatesAfter"
   [disableDatesAfter]="disableDatesAfter"></app-single-calendar>
 
@@ -28,6 +28,7 @@
   <label>Date</label>
   <input type="text"
          formControlName="date"
+         hostClassName="hostclass1"
          datePickerSingle
          formatterFromDate="DD/MM/YYYY"
          formatterToDate="DD/MM/YYYY" />
@@ -51,10 +52,14 @@
 
 <h1>Ranged Calendar</h1>
 <span>Side: {{rangedCalendarChild.side}}</span><button>change side</button><br>
+<pre>side: {{rangedCalendarChild.side}}</pre>
+<pre>{{rangedCalendarChild.value | json}}</pre>
 <app-ranged-calendar
-  #rangedCalendarChild></app-ranged-calendar>
+  #rangedCalendarChild
+  formatterFromDate="DD/MM/YYYY"
+  formatterToDate="DD/MM/YYYY"></app-ranged-calendar>
 
-
+<!--
 <h1>Ranged Calendar with Reactive Forms</h1>
 <form [formGroup]="rangedForm">
   <span>left</span>: <input type="text" formControlName="dateLeft">
@@ -70,3 +75,4 @@
     [bindLeftFormControl]="rangedForm.get('dateLeft')"
     [bindRightFormControl]="rangedForm.get('dateRight')"></app-ranged-calendar>
 </form>
+-->

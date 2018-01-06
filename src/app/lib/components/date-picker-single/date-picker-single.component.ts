@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, HostBinding, Input, Output, EventEmitter, AfterContentInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 // import { DatePickerSingleOptions } from './date-picker-single-options';
 import { ChangeChosenDayResponse } from '../single-calendar/single-calendar.component';
@@ -10,13 +10,14 @@ import { FormatterFromDateFunction, FormatterToDateFunction } from '../../servic
   templateUrl: './date-picker-single.component.html',
   styleUrls: ['./date-picker-single.component.scss']
 })
-export class DatePickerSingleComponent {
+export class DatePickerSingleComponent implements AfterContentInit {
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
   @Input() bindFormControl = new FormControl();
   @Input() noChoose = false;
-  @Input() className: string;
-  @Input() singleCalendarClassName: string;
+  @Input() hostClassName: string | string[];
+  @Input() datePickerSingleClassName: string | string[];
+  @Input() singleCalendarHostClassName: string | string[];
   @Input() startChosenToday = false;
   @Input() startViewportAtChosen = true;
   @Input() startViewportDate: Date;
@@ -27,9 +28,18 @@ export class DatePickerSingleComponent {
   @Input() formatterToDate: string | FormatterToDateFunction;
   @Input() formatterFromDate: string | FormatterFromDateFunction;
   @Input() noControls: boolean;
+  @HostBinding('class') hostClass = '';
   private open = false;
 
   constructor() { }
+
+  ngAfterContentInit() {
+    if (this.hostClassName instanceof Array && this.hostClassName.length) {
+      this.hostClass = this.hostClassName.join(' ');
+    }else if (typeof this.hostClassName === 'string') {
+      this.hostClass = this.hostClassName;
+    }
+  }
 
   public onChangeChosenDay(changeChosenDayResponse: ChangeChosenDayResponse): void {
     this.changeChosenDay.emit(changeChosenDayResponse);

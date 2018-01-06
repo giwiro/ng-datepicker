@@ -1,12 +1,12 @@
 <div
   class="date-picker-single-wrap"
   [class.hidden]="!isOpen()"
-  [ngClass]="className">
+  [ngClass]="datePickerSingleClassName">
   <div class="date-picker-single-content">
     <app-single-calendar
       [bindFormControl]="bindFormControl"
       [noChoose]="noChoose"
-      [className]="singleCalendarClassName"
+      [hostClassName]="singleCalendarHostClassName"
       [startChosenToday]="startChosenToday"
       [startViewportAtChosen]="startViewportAtChosen"
       [startViewportDate]="startViewportDate"

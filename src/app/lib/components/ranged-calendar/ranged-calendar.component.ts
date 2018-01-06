@@ -49,11 +49,13 @@ export class RangedCalendarComponent extends CalendarComponent implements AfterC
     this.currentDate = new Date();
     if (this.startChosenLeftToday) {
       this.chosenLeftDay = new Date(this.currentDate.setHours(0, 0, 0, 0));
+      this.bindLeftFormControl.setValue(this.chosenLeftDay);
       this.side = RangedDaySideValues.RIGHT;
     }
     const l: Date = this.datePickerService.formatToDate(this.bindLeftFormControl.value, this.formatterToDate);
     const r: Date = this.datePickerService.formatToDate(this.bindRightFormControl.value, this.formatterToDate);
-    if (l && r) {
+
+    if (l && r && !isNaN(l.getTime()) && !isNaN(r.getTime())) {
       if (r.getTime() < l.getTime()) {
         console.error(new Error('right value must be more than left'));
         this.chosenLeftDay = l;
@@ -65,11 +67,13 @@ export class RangedCalendarComponent extends CalendarComponent implements AfterC
         this.side = RangedDaySideValues.RIGHT;
       }
     }else {
-      if (l) {
+      if (l && !isNaN(l.getTime())) {
         this.chosenLeftDay = l;
         this.side = RangedDaySideValues.RIGHT;
-      }else if (r) {
+      }else if (r && !isNaN(r.getTime())) {
         this.chosenRightDay = r;
+        this.side = RangedDaySideValues.LEFT;
+      }else {
         this.side = RangedDaySideValues.LEFT;
       }
     }

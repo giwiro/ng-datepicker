@@ -11,6 +11,7 @@ $date-picker-trans-speed: 200ms;
 }
 
 div.date-picker-single-wrap {
+  width: 100%;
   display: inline-block;
   background-color: $date-picker-single-bg-color;
   overflow: hidden;
@@ -28,6 +29,7 @@ div.date-picker-single-wrap {
   }
 
   div.date-picker-single-content {
+    text-align: center;
     border: solid 1px $date-picker-border-color;
     padding: $date-picker-single-padding;
   }

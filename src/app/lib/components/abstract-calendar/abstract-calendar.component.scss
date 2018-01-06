@@ -33,6 +33,7 @@ $body-cell-chosen-font-weight: 300;
 }
 
 div.calendar-wrap {
+  width: 100%;
   display: inline-block;
   background-color: $calendar-wrap-font-bg-color;
   font-family: $calendar-wrap-font-family;
@@ -122,6 +123,9 @@ div.calendar-wrap {
             border-radius: $body-cell-overlay-border-radius;
             position: relative;
             margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             box-sizing: border-box;
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -142,12 +146,13 @@ div.calendar-wrap {
                 background-color: $body-cell-hover-bg-color;
                 // border: solid 1px red;
 
-                &.ranged {
+                /* &.ranged {
                   border: solid 1px red;
+
                   &:before {
                     top: -1px;
                   }
-                }
+                }*/
 
                 span {
                   color: $body-cell-hover-color;
@@ -229,7 +234,7 @@ div.calendar-wrap {
             }
 
             span {
-              line-height: $body-cell-overlay-height;
+              // line-height: $body-cell-overlay-height;
               color: $body-cell-color;
               font-size: $body-cell-font-size;
               font-weight: $body-cell-font-weight;

@@ -11,7 +11,7 @@ import {
   EventEmitter,
   Optional,
 } from '@angular/core';
-import {Form, FormControl, NgControl} from '@angular/forms';
+import { FormControl, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { DatePickerSingleComponent } from '../../components/date-picker-single/date-picker-single.component';
 import { ChangeMonthResponse } from '../../components/abstract-calendar/abstract-calendar.component';
@@ -25,6 +25,20 @@ import { FormatterFromDateFunction, FormatterToDateFunction } from '../../servic
 export class DatePickerSingleDirective implements OnInit, OnDestroy {
   @Output() changeMonth = new EventEmitter<ChangeMonthResponse>();
   @Output() changeChosenDay = new EventEmitter<ChangeChosenDayResponse>();
+  @Input() hostClassName: string | string[];
+  @Input() datePickerSingleClassName: string | string[];
+  @Input() singleCalendarHostClassName: string | string[];
+
+  @Input() startChosenToday = false;
+  @Input() startViewportAtChosen = true;
+
+  @Input() startViewportDate: Date;
+  @Input() monthLabels: string[];
+  @Input() dayLabels: string[];
+  @Input() noControls: boolean;
+  @Input() disableDatesBefore: Date;
+  @Input() disableDatesAfter: Date;
+
   @Input() closeOnChangeDay = true;
   @Input() closeOnClickOutside = true;
   @Input() formatterToDate: string | FormatterToDateFunction;
@@ -50,8 +64,21 @@ export class DatePickerSingleDirective implements OnInit, OnDestroy {
     }else if (this.bindFormControl) {
       component.bindFormControl = this.bindFormControl;
     }
+    component.singleCalendarHostClassName = this.singleCalendarHostClassName;
+    component.startChosenToday = this.startChosenToday;
+    component.startViewportAtChosen = this.startViewportAtChosen;
+
+    component.startViewportDate = this.startViewportDate;
+    component.monthLabels = this.monthLabels;
+    component.dayLabels = this.dayLabels;
+    component.noControls = this.noControls;
+    component.disableDatesBefore = this.disableDatesBefore;
+    component.disableDatesAfter = this.disableDatesAfter;
+
     component.formatterFromDate = this.formatterFromDate;
     component.formatterToDate = this.formatterToDate;
+    component.hostClassName = this.hostClassName;
+    component.datePickerSingleClassName = this.datePickerSingleClassName;
 
     this.onChangeChosenDaySubscription = component.changeChosenDay.subscribe(val => {
       this.onChangeChosenDay(val);
