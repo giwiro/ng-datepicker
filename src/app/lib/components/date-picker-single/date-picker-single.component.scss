@@ -22,7 +22,7 @@ div.date-picker-single-wrap {
   -webkit-transition: $date-picker-trans-speed;
   transition: $date-picker-trans-speed;
 
-  max-height: 300px;
+  max-height: 320px;
 
   &.hidden {
     max-height: 0;
